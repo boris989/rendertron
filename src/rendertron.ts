@@ -89,7 +89,7 @@ export class Rendertron {
 
     const mobileVersion = 'mobile' in ctx.query ? true : false;
 
-    const serialized = await this.renderer.serialize(url, mobileVersion);
+    const serialized = await this.renderer.serialize(url, mobileVersion, ctx.query.lang);
     // Mark the response as coming from Rendertron.
     ctx.set('x-renderer', 'rendertron');
     ctx.status = serialized.status;

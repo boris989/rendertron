@@ -27,7 +27,7 @@ export class Renderer {
     this.config = config;
   }
 
-  async serialize(requestUrl: string, isMobile: boolean):
+  async serialize(requestUrl: string, isMobile: boolean, lang = 'en'):
       Promise<SerializedResponse> {
     /**
      * Executed on the page after the page has loaded. Strips script and
@@ -71,6 +71,9 @@ export class Renderer {
 
     if (isMobile) {
       page.setUserAgent(MOBILE_USERAGENT);
+    }
+    if (lang) {
+      page.setExtraHTTPHeaders({ 'Accept-Language': lang });
     }
 
     page.evaluateOnNewDocument('customElements.forcePolyfill = true');
