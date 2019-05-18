@@ -97,6 +97,10 @@ export class Renderer {
           requestUrl, {timeout: this.config.timeout, waitUntil: 'networkidle0'});
     } catch (e) {
       console.error(e);
+      if (e.name === 'TimeoutError') {
+        await page.close();
+        return {status: 504, content: ''};
+      }
     }
 
     if (!response) {
